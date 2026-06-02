@@ -679,21 +679,29 @@ function LoginScreen({ onAdminLogin, onChatterView }: { onAdminLogin: (username:
               transition={{ ...springGentle, delay: 0.15 }}
             >
               <motion.div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6"
-                style={{background: 'rgba(220,53,53,0.08)', color: '#dc3535', boxShadow: 'inset 0 0 0 1px rgba(220,53,53,0.1)'}}
+                className="login-badge-v9 w-[72px] h-[72px] rounded-2xl flex items-center justify-center mx-auto mb-6 relative"
+                style={{background: 'rgba(220,53,53,0.08)', color: '#dc3535', boxShadow: 'inset 0 0 0 1px rgba(220,53,53,0.12)'}}
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ ...springBouncy, delay: 0.3 }}
               >
-                <ShieldCheck size={32} />
+                <span className="login-badge-ring" />
+                <ShieldCheck size={34} />
               </motion.div>
+              <motion.div
+                className="text-[10px] font-bold tracking-[0.22em] uppercase mb-1.5"
+                style={{color: 'var(--text-muted)'}}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.32 }}
+              >Control Room Access</motion.div>
               <motion.h2
-                className="text-xl font-black mb-2"
+                className="text-2xl font-black mb-2 font-display tracking-tight"
                 style={{color: 'var(--text-primary)'}}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...springGentle, delay: 0.35 }}
-              >Admin Login</motion.h2>
+              >Admin <span className="chatgbt-gradient-text">Login</span></motion.h2>
               <motion.p
                 className="text-sm mb-8"
                 style={{color: 'var(--text-tertiary)'}}
@@ -4652,16 +4660,19 @@ export default function App() {
               {/* Stats */}
               <div className="stats-grid grid grid-cols-4 gap-4" data-help-id="help-stats">
                 {[
-                  { v: stats.total, l: 'Dispatched', icon: <BarChart3 size={22} />, c: '#ef4444', bg: 'rgba(220,53,53,0.08)', glow: '0 4px 16px rgba(220,53,53,0.1)' },
-                  { v: stats.chatters, l: 'Chatters', icon: <UserCheck size={22} />, c: '#60a5fa', bg: 'rgba(37,99,235,0.08)', glow: '0 4px 16px rgba(37,99,235,0.1)' },
-                  { v: stats.avgChars, l: 'Avg Chars', icon: <MessageSquareText size={22} />, c: '#fbbf24', bg: 'rgba(180,83,9,0.08)', glow: '0 4px 16px rgba(180,83,9,0.1)' },
-                  { v: stats.peakQ, l: 'Peak Queue', icon: <SlidersHorizontal size={22} />, c: '#a78bfa', bg: 'rgba(124,58,237,0.08)', glow: '0 4px 16px rgba(124,58,237,0.1)' },
+                  { v: stats.total, l: 'Dispatched', icon: <BarChart3 size={22} />, c: '#ef4444', bg: 'rgba(220,53,53,0.08)', glow: '0 4px 16px rgba(220,53,53,0.1)', hint: 'all-time' },
+                  { v: stats.chatters, l: 'Chatters', icon: <UserCheck size={22} />, c: '#60a5fa', bg: 'rgba(37,99,235,0.08)', glow: '0 4px 16px rgba(37,99,235,0.1)', hint: 'unique' },
+                  { v: stats.avgChars, l: 'Avg Chars', icon: <MessageSquareText size={22} />, c: '#fbbf24', bg: 'rgba(180,83,9,0.08)', glow: '0 4px 16px rgba(180,83,9,0.1)', hint: 'per msg' },
+                  { v: stats.peakQ, l: 'Peak Queue', icon: <SlidersHorizontal size={22} />, c: '#a78bfa', bg: 'rgba(124,58,237,0.08)', glow: '0 4px 16px rgba(124,58,237,0.1)', hint: 'max depth' },
                 ].map((s, i) => (
-                  <Card key={i} className="text-center py-7 px-4 group card-enter relative" style={{boxShadow: s.glow, '--enter-delay': `${i * 0.06}s`} as React.CSSProperties}>
+                  <Card key={i} className="stat-card-v9 text-center pt-8 pb-6 px-4 group card-enter relative overflow-hidden" style={{'--stat-c': s.c, boxShadow: s.glow, '--enter-delay': `${i * 0.06}s`} as React.CSSProperties}>
+                    <span className="stat-card-rail" style={{background: `linear-gradient(90deg, transparent, ${s.c}, transparent)`}} />
+                    <span className="stat-card-aura" style={{background: `radial-gradient(circle at 50% 0%, ${s.c}22, transparent 70%)`}} />
                     <StatCelebration active={celebratingStat === s.l} />
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4 transition-transform duration-200 hover:scale-110 hover:rotate-3 active:scale-95" style={{background: s.bg, color: s.c, boxShadow: `inset 0 0 0 1px ${s.c}22`}}>{s.icon}</div>
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4 transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-3 active:scale-95" style={{background: s.bg, color: s.c, boxShadow: `inset 0 0 0 1px ${s.c}22, 0 6px 18px ${s.c}1f`}}>{s.icon}</div>
                     <AnimatedCounter value={s.v} className="text-4xl font-black font-mono leading-none mb-2" style={{color: s.c, textShadow: `0 0 20px ${s.c}44`}} />
-                    <div className="text-[10px] uppercase tracking-[0.15em] font-bold" style={{color: 'var(--text-tertiary)'}}>{s.l}</div>
+                    <div className="text-[10px] uppercase tracking-[0.15em] font-bold mb-1.5" style={{color: 'var(--text-tertiary)'}}>{s.l}</div>
+                    <span className="inline-block text-[8px] font-bold uppercase tracking-[0.12em] px-2 py-0.5 rounded-full" style={{color: s.c, background: `${s.c}14`}}>{s.hint}</span>
                   </Card>
                 ))}
                 {/* Feature 11: Audio cache stats */}
@@ -5114,6 +5125,19 @@ export default function App() {
             style={{ paddingLeft: 'var(--page-padding)', paddingRight: 'var(--page-padding)' }}
           >
           <DeferredMount>
+          <div className="page-hero-v9 mb-6 stagger-children">
+            <span className="page-hero-glow" />
+            <div className="flex items-center gap-3 relative">
+              <div className="page-hero-icon" style={{'--hero-c': '#dc3535'} as React.CSSProperties}><Mic2 size={22} /></div>
+              <div className="flex-1 min-w-0">
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight font-display leading-none">
+                  <span style={{color: 'var(--text-primary)'}}>Voice</span> <span className="chatgbt-gradient-text">&amp; FX</span>
+                </h2>
+                <p className="text-sm mt-1" style={{color: 'var(--text-tertiary)'}}>Pick an engine, sculpt the voice, and dial in studio-grade effects.</p>
+              </div>
+            </div>
+            <div className="section-header-line mt-3" />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div className="lg:col-span-7">
               <Card>
@@ -5949,6 +5973,19 @@ export default function App() {
             className="full-width-layout mx-auto py-8"
             style={{ paddingLeft: 'var(--page-padding)', paddingRight: 'var(--page-padding)' }}
           >
+          <div className="page-hero-v9 mb-6 stagger-children">
+            <span className="page-hero-glow" />
+            <div className="flex items-center gap-3 relative">
+              <div className="page-hero-icon" style={{'--hero-c': '#dc3535'} as React.CSSProperties}><Shield size={22} /></div>
+              <div className="flex-1 min-w-0">
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight font-display leading-none">
+                  <span style={{color: 'var(--text-primary)'}}>Rules</span> <span className="chatgbt-gradient-text">&amp; Moderation</span>
+                </h2>
+                <p className="text-sm mt-1" style={{color: 'var(--text-tertiary)'}}>Map voices to viewers, block words, and keep TTS on-brand.</p>
+              </div>
+            </div>
+            <div className="section-header-line mt-3" />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 stagger-group">
             <div className="lg:col-span-8 space-y-6">
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={spring}><Card data-help-id="help-user-mappings">
@@ -6203,10 +6240,22 @@ export default function App() {
             style={{ paddingLeft: 'var(--page-padding)', paddingRight: 'var(--page-padding)' }}
           >
           <DeferredMount>
-          <div className="mb-6 stagger-children">
-            <h2 className="text-2xl font-black tracking-tight" style={{color: 'var(--text-primary)'}}>Soundboard</h2>
-            <p className="text-sm" style={{color: 'var(--text-tertiary)'}}>Preview sounds, upload custom SFX, and map them to chat triggers.</p>
-            <div className="section-header-line mt-2" />
+          <div className="page-hero-v9 mb-6 stagger-children">
+            <span className="page-hero-glow" />
+            <div className="flex items-center gap-3 relative">
+              <div className="page-hero-icon" style={{'--hero-c': '#dc3535'} as React.CSSProperties}><Volume size={22} /></div>
+              <div className="flex-1 min-w-0">
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight font-display leading-none">
+                  <span style={{color: 'var(--text-primary)'}}>Sound</span><span className="chatgbt-gradient-text">board</span>
+                </h2>
+                <p className="text-sm mt-1" style={{color: 'var(--text-tertiary)'}}>Preview sounds, upload custom SFX, and map them to chat triggers.</p>
+              </div>
+              <div className="hidden sm:flex items-center gap-2 shrink-0">
+                <span className="hero-chip"><Music size={12} /> {SOUND_LIBRARY.length} built-in</span>
+                <span className="hero-chip" style={{'--chip-c': '#60a5fa'} as React.CSSProperties}><Upload size={12} /> {customSounds.length} custom</span>
+              </div>
+            </div>
+            <div className="section-header-line mt-3" />
           </div>
 
           {/* Custom Sound Upload — Advanced */}
@@ -6547,6 +6596,19 @@ export default function App() {
             className="full-width-layout mx-auto py-8"
             style={{ paddingLeft: 'var(--page-padding)', paddingRight: 'var(--page-padding)' }}
           >
+          <div className="page-hero-v9 mb-6 stagger-children">
+            <span className="page-hero-glow" />
+            <div className="flex items-center gap-3 relative">
+              <div className="page-hero-icon" style={{'--hero-c': '#dc3535'} as React.CSSProperties}><Palette size={22} /></div>
+              <div className="flex-1 min-w-0">
+                <h2 className="text-2xl sm:text-3xl font-black tracking-tight font-display leading-none">
+                  <span style={{color: 'var(--text-primary)'}}>Overlay</span> <span className="chatgbt-gradient-text">&amp; Alerts</span>
+                </h2>
+                <p className="text-sm mt-1" style={{color: 'var(--text-tertiary)'}}>Wire chat keywords to sound alerts and design your OBS overlay.</p>
+              </div>
+            </div>
+            <div className="section-header-line mt-3" />
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 stagger-group">
             <div className="lg:col-span-7">
               <Card>
