@@ -1,0 +1,85 @@
+export const DEFAULT_SOUND_BASE_URL = 'https://www.myinstants.com/media/sounds/';
+
+export interface SoundBite {
+  name: string;
+  file: string[];
+  category: string;
+  slugs?: string[];
+  query?: string;
+  mp3Url?: string; // Direct MP3 URL scraped from MyInstants page
+}
+
+const f = (name: string, slugs: string[], category: string, query?: string, files: string[] = [], mp3Url?: string): SoundBite => ({
+  name,
+  category,
+  slugs,
+  query: query || name,
+  file: files.length > 0 ? files : slugs.map(slug => `${slug}.mp3`),
+  ...(mp3Url ? { mp3Url } : {}),
+});
+
+export const SOUND_LIBRARY: SoundBite[] = [
+  f('Bruh', ['bruh'], 'Memes', 'bruh', [], 'https://www.myinstants.com/media/sounds/movie_1.mp3'),
+  f('Vine Boom', ['vine-boom-sound-70972'], 'Memes', 'vine boom', [], 'https://www.myinstants.com/media/sounds/vine-boom.mp3'),
+  f('Metal Pipe', ['metal-pipe-sound-9430'], 'Memes', 'metal pipe sound', [], 'https://www.myinstants.com/media/sounds/metal-pipe-sound.mp3'),
+  f('Taco Bell Bong', ['taco-bell-bong-42481'], 'Memes', 'taco bell bong', [], 'https://www.myinstants.com/media/sounds/taco-bell-bong-sfx.mp3'),
+  f('FBI Open Up', ['fbi-open-up-3322'], 'Memes', 'fbi open up', [], 'https://www.myinstants.com/media/sounds/fbi-open-up-sfx.mp3'),
+  f('Run', ['run-vine'], 'Memes', 'run vine', [], 'https://www.myinstants.com/media/sounds/run-vine-sound-effect.mp3'),
+  f('Nani', ['omae-wa-mou-shindeiru-nani-494'], 'Memes', 'omae wa mou shindeiru nani', [], 'https://www.myinstants.com/media/sounds/nani_Pmxf5n3.mp3'),
+  f('Noice', ['michael-rosen-noice'], 'Memes', 'michael rosen noice', [], 'https://www.myinstants.com/media/sounds/-click-nice_3.mp3'),
+  f('Stop The Cap', ['stop-the-cap-39519'], 'Memes', 'stop the cap', [], 'https://www.myinstants.com/media/sounds/zias-stop-the-cap_RjHQpxU.mp3'),
+  f('Bing Chilling', ['bing-chilling-44511'], 'Memes', 'bing chilling', [], 'https://www.myinstants.com/media/sounds/bing-chilling_fcdGgUc.mp3'),
+  f('Yoda', ['lego-yoda-death-sound-58846'], 'Memes', 'lego yoda death sound', [], 'https://www.myinstants.com/media/sounds/lego-yoda-death-sound-effect.mp3'),
+  f('Wilhelm Scream', ['wilhelm-scream'], 'Memes', 'wilhelm scream', [], 'https://www.myinstants.com/media/sounds/wilhelmscream.mp3'),
+  f('Two Hours Later', ['two-hours-later-87509'], 'Memes', 'two hours later', [], 'https://www.myinstants.com/media/sounds/spongebob-two-hours-later-2019-download-link.mp3'),
+  f('You Played Yourself', ['congrats-you-played-yourself'], 'Memes', 'you played yourself', [], 'https://www.myinstants.com/media/sounds/dont-ever-play-yourself-dj-khaled-vine.mp3'),
+  f('This Guy Stinks', ['oh-brother-this-guy-stinks-spongebob-52604'], 'Memes', 'this guy stinks spongebob', [], 'https://www.myinstants.com/media/sounds/oh-brother-this-guy-stinks_FFdigtm.mp3'),
+  f('What The Dog Doin', ['what-da-dog-doin-35890'], 'Memes', 'what da dog doin', [], 'https://www.myinstants.com/media/sounds/yt1s_wU4BGgD.mp3'),
+  f('Why You Bully Me', ['why-you-bully-me-50635'], 'Memes', 'why you bully me', [], 'https://www.myinstants.com/media/sounds/why-you-bully-me-every-line.mp3'),
+  f('Thats What She Said', ['thats-what-she-said-3-48113'], 'Memes', 'thats what she said', [], 'https://www.myinstants.com/media/sounds/thats-what-she-said_iJDl33M.mp3'),
+  f('Goofy Yell', ['goofy-yell'], 'Memes', 'goofy yell', [], 'https://www.myinstants.com/media/sounds/goofy-yell.mp3'),
+  f('Mr Krabs Walking', ['mr-krabs-walking-50254'], 'Memes', 'mr krabs walking', [], 'https://www.myinstants.com/media/sounds/mr-krabs-walking.mp3'),
+  f('Noot Noot', ['noot-noot-pingu-85062'], 'Memes', 'noot noot pingu', [], 'https://www.myinstants.com/media/sounds/noot_p0CPOIz.mp3'),
+  f('Pluh', ['pluh'], 'Memes', 'pluh', [], 'https://www.myinstants.com/media/sounds/pluh.mp3'),
+  f('Troll Laugh', ['troll-laugh'], 'Memes', 'troll laugh', [], 'https://www.myinstants.com/media/sounds/troll-laugh.mp3'),
+  f('Emotional Damage', ['emotional-damage-meme-74555'], 'Memes', 'emotional damage', [], 'https://www.myinstants.com/media/sounds/emotional-damage-meme.mp3'),
+  f('To Be Continued', ['to-be-continued-jojo'], 'Memes', 'to be continued jojo', [], 'https://www.myinstants.com/media/sounds/untitled_1071.mp3'),
+  f('Do You Know Da Wae', ['do-you-know-da-wae-33042'], 'Memes', 'do you know da wae', [], 'https://www.myinstants.com/media/sounds/do_you_know_da_way_meme_sound_effect_fullmp3converter.mp3'),
+  f('Caught In 4K', ['caught-in-4k-34036'], 'Memes', 'caught in 4k', [], 'https://www.myinstants.com/media/sounds/a1-0001_sony-a7riv-shutter.mp3'),
+  f('Rizz', ['rizz-sound-effect-54189'], 'Memes', 'rizz sound effect', [], 'https://www.myinstants.com/media/sounds/rizz-sound-effect.mp3'),
+  f('Skibidi Toilet', ['skibidi-toilet-69886'], 'Memes', 'skibidi toilet', [], 'https://www.myinstants.com/media/sounds/skibidi-toilet.mp3'),
+  f('Gyatt For The Rizzler', ['sticking-out-your-gyatt-for-the-rizzler-65590'], 'Memes', 'gyatt for the rizzler', [], 'https://www.myinstants.com/media/sounds/sticking-out-your-gyatt-for-the-rizzler.mp3'),
+  f('Fahhhh', ['fahhhh'], 'Memes', 'fahhhh', [], 'https://www.myinstants.com/media/sounds/fahhhh.mp3'),
+  f('Roblox Oof', ['roblox-oof'], 'Gaming', 'roblox oof', [], 'https://www.myinstants.com/media/sounds/roblox-death-sound_1.mp3'),
+  f('Among Us Emergency Meeting', ['among-us-emergency-meeting-5844'], 'Gaming', 'among us emergency meeting', [], 'https://www.myinstants.com/media/sounds/emergency-meeting-sound-among-us.mp3'),
+  f('Among Us Role Reveal', ['among-us-role-reveal-sound-34956'], 'Gaming', 'among us role reveal sound', [], 'https://www.myinstants.com/media/sounds/among-us-role-reveal-sound.mp3'),
+  f('Among Us Kill', ['among-us-kill-91624'], 'Gaming', 'among us kill', [], 'https://www.myinstants.com/media/sounds/65_6lhtuA0.mp3'),
+  f('Among Us Drip Theme', ['among-us-drip-theme-song-76966'], 'Gaming', 'among us drip theme song', [], 'https://www.myinstants.com/media/sounds/record-online-voice-recorder_kIwejRI.mp3'),
+  f('Mission Failed', ['mission-failed'], 'Gaming', 'mission failed', [], 'https://www.myinstants.com/media/sounds/dank-meme-compilation-volume-17_cutted.mp3'),
+  f('Mission Failed V2', ['mission-failed-we-get-em-next-time-6737'], 'Gaming', 'mission failed we get em next time', [], 'https://www.myinstants.com/media/sounds/mission-failed-well-get-em-next-time-sound-effect-zxhixnbk.mp3'),
+  f('Mission Passed', ['gta-iv-mission-passed-99974'], 'Gaming', 'gta mission passed', [], 'https://www.myinstants.com/media/sounds/gta-iv-mission-passed.mp3'),
+  f('GTA San Andreas Passed', ['gta-san-andreas-mission-passed'], 'Gaming', 'gta san andreas mission passed', [], 'https://www.myinstants.com/media/sounds/gta-san-andreas-mission-passed.mp3'),
+  f('Mario Jump', ['mario-jump'], 'Gaming', 'mario jump', [], 'https://www.myinstants.com/media/sounds/maro-jump-sound-effect_1.mp3'),
+  f('Mario Coin', ['mario-coin-sound'], 'Gaming', 'mario coin sound', [], 'https://www.myinstants.com/media/sounds/mario_coin_sound.mp3'),
+  f('Mario 1UP', ['mario-1up'], 'Gaming', 'mario 1up', [], 'https://www.myinstants.com/media/sounds/mario-1up.mp3'),
+  f('Mario Death', ['super-mario-death-23969'], 'Gaming', 'super mario death', [], 'https://www.myinstants.com/media/sounds/super-mario-death-sound-sound-effect.mp3'),
+  f('Thwomp', ['super-mario-64-thwomp'], 'Gaming', 'super mario 64 thwomp', [], 'https://www.myinstants.com/media/sounds/super-mario-64-thwomp-sound-online-audio-converter.mp3'),
+  f('Minecraft Hurt', ['minecraft-hurt'], 'Gaming', 'minecraft hurt', [], 'https://www.myinstants.com/media/sounds/classic_hurt.mp3'),
+  f('Pacman Death', ['pacman-death-44465'], 'Gaming', 'pacman death', [], 'https://www.myinstants.com/media/sounds/8d82b5_pacman_dies_sound_effect.mp3'),
+  f('Terraria Hurt Male', ['terraria-hurt-male-30782'], 'Gaming', 'terraria hurt male', [], 'https://www.myinstants.com/media/sounds/terraria-male-player-hurt-sound.mp3'),
+  f('Sad Trombone', ['sad-trombone'], 'Reactions', 'sad trombone', [], 'https://www.myinstants.com/media/sounds/sadtrombone.swf.mp3'),
+  f('Sad Violin', ['sad-violin-the-meme-one'], 'Reactions', 'sad violin the meme one', [], 'https://www.myinstants.com/media/sounds/tf_nemesis.mp3'),
+  f('Badum Tss', ['badum-tss'], 'Reactions', 'badum tss', [], 'https://www.myinstants.com/media/sounds/joke_drum_effect.mp3'),
+  f('Air Horn', ['mlg-air-horn'], 'General', 'mlg air horn', [], 'https://www.myinstants.com/media/sounds/mlg-airhorn.mp3'),
+  f('Windows XP Error', ['windows-xp-error'], 'General', 'windows xp error', [], 'https://www.myinstants.com/media/sounds/erro.mp3'),
+  f('Windows XP Error Music', ['windows-xp-error-music'], 'General', 'windows xp error music', [], 'https://www.myinstants.com/media/sounds/musica_1.mp3'),
+  f('Discord Ping', ['discord-ping-17250'], 'General', 'discord ping', [], 'https://www.myinstants.com/media/sounds/discord_ping_sound_effect.mp3'),
+  f('Evil Laugh', ['evil-laugh'], 'Reactions', 'evil laugh', [], 'https://www.myinstants.com/media/sounds/evillaugh.swf.mp3'),
+  f('Laugh Track', ['laugh-track'], 'Reactions', 'laugh track', [], 'https://www.myinstants.com/media/sounds/comic003.mp3'),
+  f('Bonk Meme', ['bonk-meme-44034'], 'Reactions', 'bonk meme', [], 'https://www.myinstants.com/media/sounds/bonk-meme.mp3'),
+  f('Crowd Gasp', ['crowd-gasp-45750'], 'Reactions', 'crowd gasp', [], 'https://www.myinstants.com/media/sounds/gasp_SJHmiqB.mp3'),
+  f('Crowd Cheering', ['crowd-cheering'], 'Reactions', 'crowd cheering', [], 'https://www.myinstants.com/media/sounds/cheering.mp3'),
+  f('Rap Air Horn', ['rap-air-horn'], 'General', 'rap air horn', [], 'https://www.myinstants.com/media/sounds/air-horn_1.mp3'),
+  f('Phone Ringing', ['your-phone-lingoging-92621'], 'General', 'your phone lingoging', [], 'https://www.myinstants.com/media/sounds/your-phone-lingoging.mp3'),
+  f('Nokia Ringtone', ['nokia-tune-90928'], 'General', 'nokia tune', [], 'https://www.myinstants.com/media/sounds/nokia-tune.mp3'),
+];

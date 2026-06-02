@@ -1,0 +1,45 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "functions": {
+    "api/cors-proxy.js": {
+      "maxDuration": 60
+    },
+    "api/sound-proxy.js": {
+      "maxDuration": 20
+    },
+    "api/sound-resolve.js": {
+      "maxDuration": 20
+    },
+    "api/camb-voices.js": {
+      "maxDuration": 30
+    },
+    "api/camb-tts.js": {
+      "maxDuration": 60
+    },
+    "api/settings.js": {
+      "maxDuration": 10
+    },
+    "api/public-voices.js": {
+      "maxDuration": 30
+    },
+    "api/auth-login.js": {
+      "maxDuration": 10
+    },
+    "api/sfx-upload.js": {
+      "maxDuration": 15,
+      "memory": 1024
+    },
+    "api/sfx-data.js": {
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    { "source": "/api/auth/login", "destination": "/api/auth-login" },
+    { "source": "/api/public-voices", "destination": "/api/public-voices" },
+    { "source": "/api/settings", "destination": "/api/settings" },
+    { "source": "/api/sfx-upload", "destination": "/api/sfx-upload" },
+    { "source": "/api/sfx-data", "destination": "/api/sfx-data" }
+  ]
+}
